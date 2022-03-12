@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "johnsoncodehk.volar",
+        "dbaeumer.vscode-eslint",
+        "zhaoqing.gitlabmrt",
+        "stylelint.vscode-stylelint",
+        "voorjaar.windicss-intellisense",
+        "antfu.iconify"
+    ]
+}

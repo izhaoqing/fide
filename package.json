@@ -1,0 +1,77 @@
+{
+    "name": "vite-tpl",
+    "version": "0.1.0",
+    "description": "vite tpl",
+    "main": "index.js",
+    "scripts": {
+        "dev": "vite --open",
+        "serve": "node ./server/index.js",
+        "build": "vite build",
+        "preview": "vite preview",
+        "preview:build": "pnpm build && vite preview",
+        "lint": "pnpm lint:eslint && pnpm lint:stylelint",
+        "lint:eslint": "eslint \"src/**/*.{vue,ts,js}\" --fix",
+        "lint:stylelint": "stylelint \"src/**/*.{vue,html,css,less,scss,sass}\" --fix",
+        "preinstall": "npx only-allow pnpm",
+        "prepare": "husky install"
+    },
+    "keywords": [
+        "vite",
+        "vue"
+    ],
+    "author": "zhaoqing",
+    "license": "MIT",
+    "dependencies": {
+        "@unocss/reset": "^0.27.6",
+        "@vueuse/core": "^7.7.1",
+        "axios": "^0.25.0",
+        "naive-ui": "^2.26.3",
+        "pinia": "^2.0.11",
+        "qs": "^6.10.3",
+        "vue": "^3.2.31",
+        "vue-drag-resize": "^2.0.3",
+        "vue-router": "^4.0.13"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^16.2.1",
+        "@commitlint/config-conventional": "^16.2.1",
+        "@rollup/plugin-strip": "^2.1.0",
+        "@rushstack/eslint-patch": "^1.1.0",
+        "@trscd/eslint-config": "^0.1.4",
+        "@trscd/stylelint-config-tpconfig": "^1.1.3",
+        "@types/lodash-es": "^4.17.6",
+        "@types/node": "^17.0.21",
+        "@types/qs": "^6.9.7",
+        "@typescript-eslint/parser": "^5.14.0",
+        "@unocss/transformer-directives": "^0.27.6",
+        "@vitejs/plugin-vue": "^2.2.4",
+        "@vue/compiler-sfc": "^3.2.31",
+        "@vue/eslint-config-typescript": "^10.0.0",
+        "@windicss/plugin-scrollbar": "^1.2.3",
+        "cz-conventional-changelog": "^3.3.0",
+        "eslint": "^8.10.0",
+        "eslint-plugin-vue": "^8.5.0",
+        "husky": "^7.0.4",
+        "less": "^4.1.2",
+        "lint-staged": "^12.3.5",
+        "postcss": "^8.4.8",
+        "stylelint": "^14.5.3",
+        "typescript": "^4.6.2",
+        "unocss": "^0.27.6",
+        "unplugin-auto-import": "^0.6.1",
+        "unplugin-icons": "^0.13.3",
+        "unplugin-vue-components": "^0.17.21",
+        "vite": "^2.8.6",
+        "vite-plugin-windicss": "^1.8.3",
+        "windicss": "^3.5.1"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    },
+    "lint-staged": {
+        "*.{js,ts,vue}": "pnpm lint:eslint",
+        "*.{vue,html,css,less,scss,sass}": "pnpm lint:stylelint"
+    }
+}
