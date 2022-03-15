@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import ComponentList from './ComponentList.vue';
-import EditorView from './EditorView.vue';
+import EditorView from './editorView/Index.vue';
 import PanelView from './settingPanel/PanelView.vue';
 </script>
 <style>

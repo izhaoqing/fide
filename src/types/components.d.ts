@@ -6,7 +6,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     Focus: typeof import('./../directives/focus.js')['default']
     InfoText: typeof import('./../components/InfoText.vue')['default']
-    NConfigProvider: typeof import('naive-ui')['NConfigProvider']
   }
 }
 
