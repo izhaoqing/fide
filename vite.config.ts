@@ -21,7 +21,7 @@ export default (env: ConfigEnv) => {
             proxy: {
                 '/mock': 'https://trsyapi.trscd.com.cn',
             },
-            port: 5000,
+            port: 4000,
         },
         resolve: {
             alias: {
@@ -57,6 +57,7 @@ export default (env: ConfigEnv) => {
                     'vue',
                     'vue-router',
                     '@vueuse/core',
+                    'pinia',
                 ],
                 dts: 'src/types/auto-imports.d.ts',
                 eslintrc: {
@@ -86,7 +87,7 @@ export default (env: ConfigEnv) => {
                     },
                 },
                 transformers: [
-                    transformerDirective(),
+                    (transformerDirective as any)(),
                 ],
                 rules: [
                     [/^scrollbar-([^-]+)(-(.+))?$/, ([, d,, value], { rawSelector }) => {

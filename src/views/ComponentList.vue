@@ -16,7 +16,7 @@
         </div>
         <div class="relative w-200px bg-#0a0b0d">
             <div class="inner p-16px space-y-14px scrollbar-w-0">
-                <div v-for="item in list" :key="item.id">
+                <div v-for="item in list" :key="item.id" @click="checkCom(item.id)">
                     <div class="text-hex-bcc9d4 text-size-12px bg-hex-212326 px-5px leading-22px">
                         {{ item.name }}
                     </div>
@@ -30,6 +30,9 @@
 <script lang="ts" setup>
 import IconControl from '~icons/my-icons/control';
 import IconText from '~icons/my-icons/text';
+import { usePresetStore } from '@/store/preset';
+
+const { addComponent } = usePresetStore();
 
 const expand = ref(true);
 const components = shallowRef([
@@ -38,13 +41,13 @@ const components = shallowRef([
         id: 'weight',
         icon: IconControl,
         children: [
-            {
-                name: '按钮',
-                id: 'button',
-            },
+            // {
+            //     name: '按钮',
+            //     id: 'button',
+            // },
             {
                 name: 'Tab切换',
-                id: 'tab',
+                id: 'FTabs',
             },
         ],
     },
@@ -55,7 +58,7 @@ const components = shallowRef([
         children: [
             {
                 name: '文本',
-                id: 'text',
+                id: 'FText',
             },
         ],
     },
@@ -71,6 +74,11 @@ const list = computed(() => {
     const item = components.value.find(item => item.id === type.value);
     return item?.children || [];
 });
+
+// todo
+const checkCom = (id: any) => {
+    addComponent(id);
+};
 
 </script>
 

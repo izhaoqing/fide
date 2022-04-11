@@ -5,7 +5,25 @@
 declare module 'vue' {
   export interface GlobalComponents {
     Focus: typeof import('./../directives/focus.js')['default']
+    IMyIconsArrow: typeof import('~icons/my-icons/arrow')['default']
+    IMyIconsEllipsis: typeof import('~icons/my-icons/ellipsis')['default']
+    IMyIconsReceive: typeof import('~icons/my-icons/receive')['default']
+    IMyIconsReload: typeof import('~icons/my-icons/reload')['default']
+    IMyIconsTrigger: typeof import('~icons/my-icons/trigger')['default']
     InfoText: typeof import('./../components/InfoText.vue')['default']
+    NCheckbox: typeof import('naive-ui')['NCheckbox']
+    NCollapseTransition: typeof import('naive-ui')['NCollapseTransition']
+    NConfigProvider: typeof import('naive-ui')['NConfigProvider']
+    NForm: typeof import('naive-ui')['NForm']
+    NFormItem: typeof import('naive-ui')['NFormItem']
+    NInput: typeof import('naive-ui')['NInput']
+    NPopover: typeof import('naive-ui')['NPopover']
+    NSelect: typeof import('naive-ui')['NSelect']
+    NTab: typeof import('naive-ui')['NTab']
+    NTable: typeof import('naive-ui')['NTable']
+    NTabPane: typeof import('naive-ui')['NTabPane']
+    NTabs: typeof import('naive-ui')['NTabs']
+    NTooltip: typeof import('naive-ui')['NTooltip']
   }
 }
 

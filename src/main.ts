@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
-import { createPinia } from 'pinia';
 import router from './router';
 import App from './App.vue';
+import { component } from './packages';
 import axios from '@/plugins/axios';
 
 // // windicss layers
@@ -14,7 +14,7 @@ import axios from '@/plugins/axios';
 // // windicss devtools support (dev only)
 // import 'virtual:windi-devtools';
 
-import '@unocss/reset/eric-meyer.css';
+import 'normalize.css';
 // 'uno:[layer-name].css'
 import 'uno:components.css';
 // layers that are not 'components' and 'utilities' will fallback to here
@@ -26,8 +26,14 @@ import 'uno:utilities.css';
 
 const pinia = createPinia();
 
-createApp(App)
-    .use(router)
+const app = createApp(App);
+
+// 注册组件列表
+Object.entries(component).forEach(entry => {
+    app.component(entry[0], entry[1]);
+});
+
+app.use(router)
     .use(pinia)
     .use(axios)
     .mount('#app');

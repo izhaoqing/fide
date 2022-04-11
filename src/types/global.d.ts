@@ -9,6 +9,7 @@ declare module 'axios' {
 declare global {
     interface Window {
         axios: AxiosInstance;
+        handlers: any;
     }
     const axios: AxiosInstance;
     // type CustomizedHTMLElement<T> = HTMLElement & T
