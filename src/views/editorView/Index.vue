@@ -41,7 +41,7 @@
                             @resizing="handleResize(com.id, $event)"
                             @dragging="handleResize(com.id, $event)"
                         >
-                            <div :class="{'hover-border': com.id !== currentComId}" class="absolute w-full h-full l-0 t-0 z-2"></div>
+                            <div class="absolute l-0 t-0 w-full h-full z-2"></div>
                             <component :is="com.name" :id="com.id"></component>
                         </vue-drag-resize>
                     </div>
@@ -216,7 +216,6 @@ const handleResize = (id: string, rect: RectType) => {
 };
 
 // 快捷键
-
 hotkeys('del, delete, backspace', () => {
     if (currentComId.value) {
         dialog.warning({
@@ -245,15 +244,27 @@ hotkeys('del, delete, backspace', () => {
         height: 0;
     }
 }
-.com-item:hover {
-    .hover-border {
-        border: 1px dashed #d6d6d6;
-    }
-}
 .zoom-btn {
     @apply text-hex-bcc9d4 text-size-14px px-6px pb-2px leading-none cursor-pointer select-none;
 }
 .n-select :deep(.n-base-selection-input__content) {
     @apply text-center;
+}
+.com-item {
+    &::before {
+        display: none;
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        outline: 1px dashed #d6d6d6;
+    }
+    &:hover::before,
+    &.active::before {
+        display: block;
+    }
 }
 </style>

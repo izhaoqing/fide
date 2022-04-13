@@ -44,6 +44,7 @@ export const usePresetStore = defineStore('preset', () => {
         const com = preset.value.components.find(c => c.id === id);
         if (!com) return;
         com.basic[key].value = value;
+        // currentCom.value!.basic[key].value = value;
     };
 
     // 已选的组件列表
