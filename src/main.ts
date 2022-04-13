@@ -3,6 +3,7 @@ import router from './router';
 import App from './App.vue';
 import { component } from './packages';
 import axios from '@/plugins/axios';
+import 'tiv/styles/base.css';
 
 // // windicss layers
 // import 'virtual:windi-base.css';

@@ -65,12 +65,13 @@ export const subEvents = <T extends string>(config: ComponentConfig) => {
     watchEffect(() => {
         sub.value.forEach(item => {
             const eventName = item.action as unknown as T;
-            // cbWarp: {[k in T]: HandlerType} = {};
             subMap[eventName] = data => {
                 if (item.enable === false) return;
                 const params: Record<string, any> = {};
                 item.keyMap.forEach(({ key, value }) => {
-                    params[key] = data[value] || '';
+                    if (value !== '') {
+                        params[key] = data[value];
+                    }
                 });
                 eventSet.value[eventName](params);
             };

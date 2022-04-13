@@ -1,5 +1,6 @@
 import type { Ref } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
+import debounce from 'lodash/debounce';
 import type { PagePreset, StyleField } from '@/types/preset';
 import { config as defaultConf, info as pkgsInfo } from '@/packages';
 
@@ -18,6 +19,13 @@ export const usePresetStore = defineStore('preset', () => {
         width: 1920,
         height: 1080,
         components: [],
+    });
+
+    watch(preset, debounce(() => {
+        console.log('preset update');
+        localStorage.setItem('preset', JSON.stringify(preset.value));
+    }, 3000), {
+        deep: true,
     });
 
     const updatePreset = (p: PagePreset) => {
@@ -46,9 +54,9 @@ export const usePresetStore = defineStore('preset', () => {
         conf.id = uuidv4();
         preset.value.components.push(conf);
     };
-    const removeComponent = (name: string | string[]) => {
+    const removeComponent = (id: string | string[]) => {
         preset.value.components = preset.value.components.filter(c => {
-            return Array.isArray(name) ? name.includes(c.name) : name !== c.name;
+            return Array.isArray(id) ? id.includes(c.id) : id !== c.id;
         });
     };
 

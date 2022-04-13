@@ -13,8 +13,8 @@
             :path="item.name"
             :class="{hide: item.component === undefined}"
         >
-            <!-- todo -->
             <component :is="formMap[item.component || 'div']" v-model:value="item.value" size="small"></component>
+            <!-- <component :is="formMap[item.component || 'div']" v-model:value="formData[item.name]" size="small"></component> -->
             <!-- <n-input-number v-if="item.name ==='width'" v-model:value="item.value" :min="basicConf.minW.value"></n-input-number>
             <n-input-number v-else-if="item.name ==='height'" v-model:value="item.value" :min="basicConf.minH.value"></n-input-number>
             <n-input-number v-else-if="item.name ==='left'" v-model:value="item.value" :min="0"></n-input-number>
@@ -27,9 +27,9 @@
 
 <script lang="ts" setup>
 import { NInputNumber, NColorPicker } from 'naive-ui';
-// import type { DefineComponent } from 'vue';
+import type { ComputedRef } from 'vue';
 import { usePresetStore } from '@/store/preset';
-// import type { basicConfType } from '@/types/preset';
+import type { basicConfType } from '@/types/preset';
 
 type FormMapType = Record<string, any>;
 const formMap: FormMapType = {
@@ -40,11 +40,18 @@ const formMap: FormMapType = {
 
 const presetStore = usePresetStore();
 const { currentCom } = storeToRefs(presetStore);
-const basicConf = computed(() => {
+const basicConf: ComputedRef<basicConfType> = computed(() => {
     return currentCom.value!.basic;
 });
 
-// const labelStyle = 'font-size: 14px;';
+// const formData = reactive<Record<string, string | number>>({});
+// watchEffect(() => {
+//     Object.entries(basicConf.value)
+//         .filter(([, item]) => item.component)
+//         .forEach(([key, item]) => {
+//             formData[key] = item.value;
+//         });
+// });
 
 </script>
 

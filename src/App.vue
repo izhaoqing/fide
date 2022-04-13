@@ -6,6 +6,7 @@
 <script lang="ts" setup>
 import { darkTheme, zhCN, dateZhCN } from 'naive-ui';
 import type { GlobalThemeOverrides } from 'naive-ui';
+import { usePresetStore } from '@/store/preset';
 
 const themeOverrides: GlobalThemeOverrides = {
     common: {
@@ -13,4 +14,10 @@ const themeOverrides: GlobalThemeOverrides = {
         primaryColorHover: '#2483ff',
     },
 };
+
+const { updatePreset } = usePresetStore();
+const preset = localStorage.getItem('preset');
+if (preset) {
+    updatePreset(JSON.parse(preset));
+}
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div :class="{ expand }" class="flex items-stretch h-full w-40px duration-300">
+    <div :class="{ expand, hidden: props.hidden }" class="flex items-stretch h-full w-40px duration-300">
         <div class="relative w-40px flex-shrink-0 bg-hex-191c21">
             <div class="inner scrollbar-w-0 space-y-5 py-4">
                 <div
@@ -14,7 +14,7 @@
                 </div>
             </div>
         </div>
-        <div class="relative w-200px bg-#0a0b0d">
+        <div class="relative w-200px bg-#0a0b0d shrink-0">
             <div class="inner p-16px space-y-14px scrollbar-w-0">
                 <div v-for="item in list" :key="item.id" @click="checkCom(item.id)">
                     <div class="text-hex-bcc9d4 text-size-12px bg-hex-212326 px-5px leading-22px">
@@ -31,6 +31,13 @@
 import IconControl from '~icons/my-icons/control';
 import IconText from '~icons/my-icons/text';
 import { usePresetStore } from '@/store/preset';
+
+const props = defineProps({
+    hidden: {
+        type: Boolean,
+        default: true,
+    },
+});
 
 const { addComponent } = usePresetStore();
 
@@ -57,7 +64,7 @@ const components = shallowRef([
         icon: IconText,
         children: [
             {
-                name: '文本',
+                name: '多行文本',
                 id: 'FText',
             },
         ],
@@ -94,5 +101,8 @@ const checkCom = (id: any) => {
 }
 .active span {
     @apply text-primary;
+}
+.hidden {
+    @apply w-0;
 }
 </style>

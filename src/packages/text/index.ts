@@ -5,7 +5,7 @@ import type { ComponentConfig } from '@/types/preset';
 
 export const config: () => ComponentConfig = () => ({
     name: 'FText',
-    label: '文本',
+    label: '多行文本',
     id: '',
     basic: {
         width: {

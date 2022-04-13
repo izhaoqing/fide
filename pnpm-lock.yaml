@@ -23,6 +23,7 @@ specifiers:
   cz-conventional-changelog: ^3.3.0
   eslint: ^8.10.0
   eslint-plugin-vue: ^8.5.0
+  hotkeys-js: ^3.8.9
   husky: ^7.0.4
   less: ^4.1.2
   lint-staged: ^12.3.5
@@ -34,6 +35,7 @@ specifiers:
   qs: ^6.10.3
   rollup: ^2.70.1
   stylelint: ^14.5.3
+  tiv: ^0.0.7
   typescript: ^4.6.2
   unocss: v0.30.7
   unplugin-auto-import: ^0.6.8
@@ -51,11 +53,13 @@ dependencies:
   '@unocss/reset': 0.27.6
   '@vueuse/core': 7.7.1_vue@3.2.31
   axios: 0.25.0
+  hotkeys-js: 3.8.9
   lodash: 4.17.21
   naive-ui: 2.26.4_vue@3.2.31
   normalize.css: 8.0.1
   pinia: 2.0.11_typescript@4.6.2+vue@3.2.31
   qs: 6.10.3
+  tiv: 0.0.7_vue@3.2.31
   uuid: 8.3.2
   vue: 3.2.31
   vue-drag-resize: 2.0.3
@@ -1248,6 +1252,10 @@ packages:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
     engines: {node: '>=8'}
     dev: true
+
+  /body-scroll-lock/3.1.5:
+    resolution: {integrity: sha512-Yi1Xaml0EvNA0OYWxXiYNqY24AfWkbA6w5vxE7GWxtKfzIbZM+Qw+aSmkgsbWzbHiy/RCSkUZBplVxTA+E4jJg==}
+    dev: false
 
   /brace-expansion/1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
@@ -2783,6 +2791,10 @@ packages:
     dependencies:
       lru-cache: 6.0.0
     dev: true
+
+  /hotkeys-js/3.8.9:
+    resolution: {integrity: sha512-R73wV21xjHq+sJcBhh+LJGvfZO5+p1vGFtEwCc6sCj5nnTyiZKBa1knge6LNBxHmlRe55PVBXNNM/4lJOIVAwQ==}
+    dev: false
 
   /html-tags/3.1.0:
     resolution: {integrity: sha512-1qYz89hW3lFDEazhjW0yVAV87lw8lVkrJocr72XmBkMKsoSVJCQx3W8BXsC7hO2qAt8BoVjYjtAcZ9perqGnNg==}
@@ -4500,6 +4512,16 @@ packages:
     dependencies:
       readable-stream: 3.6.0
     dev: true
+
+  /tiv/0.0.7_vue@3.2.31:
+    resolution: {integrity: sha512-Vg4naKeHM3ZzUIYq7ASCZBNqF/TUyawqcZDhtDu2ke4dGEMVDsUak1olmprvyNxN0r4rlazZ5+1s1Eq/QHiy/A==}
+    peerDependencies:
+      vue: ^3.0.5
+    dependencies:
+      body-scroll-lock: 3.1.5
+      lodash: 4.17.21
+      vue: 3.2.31
+    dev: false
 
   /tmp/0.0.33:
     resolution: {integrity: sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==}

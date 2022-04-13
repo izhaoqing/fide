@@ -36,10 +36,12 @@
                             :x="com.basic.left.value"
                             :y="com.basic.top.value"
                             :z="com.basic.z.value"
+                            class="com-item"
                             @click.stop="updateCurrentComId(com.id)"
                             @resizing="handleResize(com.id, $event)"
                             @dragging="handleResize(com.id, $event)"
                         >
+                            <div :class="{'hover-border': com.id !== currentComId}" class="absolute w-full h-full l-0 t-0 z-2"></div>
                             <component :is="com.name" :id="com.id"></component>
                         </vue-drag-resize>
                     </div>
@@ -59,20 +61,24 @@
 </template>
 
 <script lang="ts" setup>
-import type { Ref } from 'vue';
+import type { Ref, StyleValue } from 'vue';
+import { useDialog } from 'naive-ui';
 import VueDragResize from 'vue-drag-resize';
 import throttle from 'lodash/throttle';
+import hotkeys from 'hotkeys-js';
 import CanvasRuler from './CanvasRuler.vue';
 import type { RulerOpt } from '@/utils/editor';
 import type { PagePreset } from '@/types/preset';
 import type { RectType } from '@/types/dragResizeType';
 import { usePresetStore } from '@/store/preset';
 
+const dialog = useDialog();
+
 const presetStore = usePresetStore();
 const store = storeToRefs(presetStore);
 const preset: Ref<PagePreset> = store.preset;
 const currentComId = store.currentComId;
-const { updateCurrentComId, updateBasicConf } = presetStore;
+const { updateCurrentComId, updateBasicConf, removeComponent } = presetStore;
 
 const rulerWrapEl = ref<HTMLElement>();
 const rulerSize = shallowRef({ width: 0, height: 0 });
@@ -124,7 +130,7 @@ const topRulerOpt = computed<RulerOpt>(() => {
 
 // 视图元素
 const viewEl = ref<HTMLDivElement>();
-const viewOuterStyle = ref({});
+const viewOuterStyle = ref<StyleValue>();
 const setOuterSize = async() => {
     if (!viewEl.value) return;
     await new Promise(res => setTimeout(res, 500));
@@ -153,11 +159,13 @@ const setScale = () => {
 };
 onMounted(setScale);
 // 视图元素样式
-const viewStyle = computed(() => {
+const viewStyle = computed<StyleValue>(() => {
     return {
         width: `${preset.value.width}px`,
         height: `${preset.value.height}px`,
         transform: `scale(${scale.value})`,
+        background: preset.value.pageBg,
+        boxShadow: 'rgb(0 0 0 / 50%) 0 0 30px 0',
     };
 });
 
@@ -206,6 +214,21 @@ const handleResize = (id: string, rect: RectType) => {
     updateBasicConf(id, 'left', rect.left);
     updateBasicConf(id, 'top', rect.top);
 };
+
+// 快捷键
+
+hotkeys('del, delete, backspace', () => {
+    if (currentComId.value) {
+        dialog.warning({
+            title: '警告',
+            content: '确定删除选中的组件？',
+            positiveText: '确定',
+            negativeText: '取消',
+            onPositiveClick: () => removeComponent(currentComId.value),
+            onNegativeClick: () => {},
+        });
+    }
+});
 </script>
 
 <style scoped lang="less">
@@ -220,6 +243,11 @@ const handleResize = (id: string, rect: RectType) => {
     &::-webkit-scrollbar-corner {
         width: 0;
         height: 0;
+    }
+}
+.com-item:hover {
+    .hover-border {
+        border: 1px dashed #d6d6d6;
     }
 }
 .zoom-btn {
