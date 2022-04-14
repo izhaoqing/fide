@@ -21,7 +21,14 @@
                     接收事件
                 </p>
             </div>
-            <collapse-sub v-for="item in eventConf.sub" :key="item.id" v-model="item.enable" :conf="item" class="mb-16px">
+            <collapse-sub
+                v-for="item in eventConf.sub"
+                :key="item.id"
+                v-model="item.enable"
+                :conf="item"
+                class="mb-16px"
+                @delete-sup="deleteSub(item)"
+            >
                 <div class="flex items-center mb-10px">
                     <p class="shrink-0 mr-10px">
                         事件
@@ -125,8 +132,8 @@ const addSub = () => {
         keyMap: defaultItem.keyMap.map(item => {
             return {
                 label: item.label,
-                key: item.value,
-                value: '',
+                key: item.key,
+                value: item.value,
             };
         }),
     });
@@ -135,6 +142,13 @@ const handleAction = (v: string, item: EventSubType) => {
     const cur = actions.value.find(a => a.value === v);
     if (!cur) return;
     item.name = cur.label;
+};
+
+const deleteSub = (item: EventSubType) => {
+    const index = eventConf.value.sub.findIndex(v => v === item);
+    if (index >= 0) {
+        eventConf.value.sub.splice(index);
+    }
 };
 </script>
 

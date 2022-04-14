@@ -13,6 +13,10 @@ const themeOverrides: GlobalThemeOverrides = {
         primaryColor: '#2483ff',
         primaryColorHover: '#2483ff',
     },
+    Button: {
+        textColorPrimary: '#fff',
+        textColorHoverPrimary: '#fff',
+    },
 };
 
 const { updatePreset } = usePresetStore();
