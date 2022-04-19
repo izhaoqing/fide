@@ -4,7 +4,7 @@
             <p class="text-zinc-40 flex-1">
                 {{ conf.name }}
             </p>
-            <n-popconfirm @positive-click="emit('deleteSup')">
+            <n-popconfirm @positive-click="emit('deleteSub')">
                 <template #trigger>
                     <i-my-icons-delete class="fill-#ddd hover:fill-primary mr-10px outline-none" @click.stop></i-my-icons-delete>
                 </template>

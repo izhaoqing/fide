@@ -4,13 +4,13 @@ import plugin from 'windicss/plugin';
 
 export default defineConfig({
     attributify: true,
+    shortcuts: {
+        'flex-center': 'flex items-center justify-center',
+    },
     theme: {
-        // extend: {
-        //     colors: {
-        //         // 增加颜色
-        //         primary: '#2483ff',
-        //     },
-        // },
+        colors: {
+            primary: '#2483ff',
+        },
     },
     plugins: [
         require('windicss/plugin/line-clamp'),
@@ -62,7 +62,4 @@ export default defineConfig({
         //     }
         //   })
     ],
-    shortcuts: {
-        'flex-center': 'flex items-center justify-center',
-    },
 });
