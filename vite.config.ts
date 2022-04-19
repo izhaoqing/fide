@@ -11,6 +11,7 @@ import { FileSystemIconLoader } from 'unplugin-icons/loaders';
 // import WindiCSS from 'vite-plugin-windicss';
 import Unocss from 'unocss/vite';
 import strip from '@rollup/plugin-strip';
+import unocssConfig from './windi.config.js';
 
 export default (env: ConfigEnv) => {
     return defineConfig({
@@ -71,7 +72,8 @@ export default (env: ConfigEnv) => {
                 },
             }),
             // WindiCSS(),
-            Unocss(),
+            // todo
+            Unocss(unocssConfig as any),
         ],
     });
 };

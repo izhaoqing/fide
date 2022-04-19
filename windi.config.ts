@@ -1,9 +1,14 @@
-import { defineConfig } from 'windicss/helpers';
-import plugin from 'windicss/plugin';
-// import aspectRatio from 'windicss/plugin/aspect-ratio';
+import { presetAttributify, presetWind } from 'unocss';
+import transformerDirective from '@unocss/transformer-directives';
+import type { defineConfig } from 'unocss/vite';
 
-export default defineConfig({
-    attributify: true,
+type C = Parameters<typeof defineConfig>
+
+const config: C[0] = {
+    presets: [
+        presetAttributify(),
+        presetWind(),
+    ],
     shortcuts: {
         'flex-center': 'flex items-center justify-center',
     },
@@ -12,54 +17,25 @@ export default defineConfig({
             primary: '#2483ff',
         },
     },
-    plugins: [
-        require('windicss/plugin/line-clamp'),
-        require('@windicss/plugin-scrollbar'),
-        plugin(({ addUtilities }) => {
-            addUtilities({
-                '.scrollbar-0': {
-                    '&::-webkit-scrollbar': {
-                        width: '0',
-                        height: '0',
-                    },
-                },
-            });
-        }),
-        // scrollbar size
-        // background-image-url
-
-        // plugin(({ addDynamic, theme }) => {
-        //     addDynamic('line-clamp', ({ Utility, Property, Style }) => {
-        //         if (Utility.amount === 'none') return Style(Utility.class, Property('-webkit-line-clamp', 'unset'));
-        //         const value = Utility.handler.handleStatic(theme('lineClamp')).handleNumber(1, undefined, 'int').value;
-        //         if (value) {
-        //             return Style.generate(`${Utility.class}::-webkit-scrollbar`, {
-        //                 width: value,
-        //                 height: value,
-        //             });
-        //         }
-        //     }, {
-        //         group: 'lineClamp',
-        //         completions: [
-        //             'line-clamp-none',
-        //             'line-clamp-{int}',
-        //         ],
-        //     });
-        // }),
-        // addDynamic('filter', ({ Utility, Style }) => {
-        //     return Utility.handler
-        //       .handleStatic(Style('filter'))
-        //       .createProperty(['-webkit-filter', 'filter'])
-        //   })
-        // plugin((style, prop) {
-        //     return function({ Utility, Style }) {
-        //       return Utility.handler
-        //         .handleStatic(Style(style))
-        //         .handleSize()
-        //         .handleNumber(1, undefined, 'int', (number) => `${number}rpx`)
-        //         .handleNegative()
-        //         .createProperty(prop)
-        //     }
-        //   })
+    transformers: [
+        (transformerDirective as any)(),
     ],
-});
+    rules: [
+        [/^scrollbar-([^-]+)(-(.+))?$/, ([, d,, value], { rawSelector }) => {
+            let p = '';
+            if (!value) {
+                p = `width: ${d}; height: ${d}`;
+            }
+            if (d === 'w') {
+                p = `width: ${value}`;
+            } else if (p === 'h') {
+                p = `height: ${value}`;
+            }
+            return `.${rawSelector}::-webkit-scrollbar {
+                ${p}
+            }`;
+        }],
+    ],
+};
+
+export default config;
