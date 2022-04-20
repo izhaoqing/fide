@@ -2,9 +2,9 @@ import { presetAttributify, presetWind } from 'unocss';
 import transformerDirective from '@unocss/transformer-directives';
 import type { defineConfig } from 'unocss/vite';
 
-type C = Parameters<typeof defineConfig>
+type Conf = Parameters<typeof defineConfig>[0]
 
-const config: C[0] = {
+const config: Conf = {
     presets: [
         presetAttributify(),
         presetWind(),

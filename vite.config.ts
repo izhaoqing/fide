@@ -72,8 +72,7 @@ export default (env: ConfigEnv) => {
                 },
             }),
             // WindiCSS(),
-            // todo
-            Unocss(unocssConfig as any),
+            Unocss(unocssConfig),
         ],
     });
 };
